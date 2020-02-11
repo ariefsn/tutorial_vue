@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properti Vue</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      props: {
+        myProp: {
+          type: String,
+          default: 'halo dunia'
+        }
+      },
+      components: {
+        component1,
+        component2
+      },
+      data () {
+        return {
+          experienced: false
+        }
+      },
+      computed: {
+        myComputed () {
+          return `halo ${this.name}`
+        }
+      },
+      beforeCreate() {},
+      created() {},
+      beforeMount() {},
+      mounted() {},
+      beforeUpdate() {},
+      updated() {},
+      beforeDestroy() {},
+      destroyed() {},
+      methods: {
+        halo () {
+          alert(this.myComputed)
+        }
+      },
+    });
+  </script>
+</body>
+</html>

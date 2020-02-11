@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computed dan Watch Vue</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <label for="namaDepan">Nama Depan: </label>
+      <input type="text" id="namaDepan" v-model="namaDepan">
+    </div>
+    <div>
+      <label for="namaBelakang">Nama Belakang: </label>
+      <input type="text" id="namaBelakang" v-model="namaBelakang">
+    </div>
+    <div>
+      Nama Lengkap Saya: {{ namaLengkap }}
+    </div>
+    <div>
+      <label for="namaLengkap">Nama Lengkap: </label>
+      <input type="text" id="namaLengkap" v-model="namaLengkapBaru">
+    </div>
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          namaDepan: '',
+          namaBelakang: ''
+        }
+      },
+      computed: {
+        namaLengkap () {
+          return this.namaDepan + ' ' + this.namaBelakang
+        },
+        namaLengkapBaru: {
+          get () {
+            return this.namaDepan + ' ' + this.namaBelakang
+          },
+          set (namaLengkapBaru) {
+            if (namaLengkapBaru) {
+              let split = namaLengkapBaru.split(' ')
+              this.namaDepan = split[0]
+              this.namaBelakang = split[1]
+            }
+          }
+        }
+      },
+      watch: {
+        namaDepan (namaDepan) {
+          console.log('Ini adalah watch namaDepan, nilainya =', namaDepan)
+        },
+        namaLengkapBaru (namaLengkapBaru) {
+          console.log('Ini adalah watch namaLengkapBaru, nilainya =', namaLengkapBaru)
+        }
+      }
+    });
+  </script>
+</body>
+</html>

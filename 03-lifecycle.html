@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifecycle Vue</title>
+</head>
+<body>
+  <div id="app">
+    <label for="experience">Sudah belajar Vue?</label>
+    <input type="checkbox" id="experience" v-model="experienced">
+    <span>{{ experienced ? 'Sudah dong' : 'Belum :(' }}</span>
+    <br/>
+    <button @click="destroyMe">Musnahkan Saya :(</button>
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          experienced: false
+        }
+      },
+      beforeCreate() {
+        console.log('hook before create')
+      },
+      created() {
+        console.log('hook created')
+      },
+      beforeMount() {
+        console.log('hook before mount')
+      },
+      mounted() {
+        console.log('hook mounted')
+      },
+      beforeUpdate() {
+        console.log('hook before update')
+      },
+      updated() {
+        console.log('hook updated')
+      },
+      beforeDestroy() {
+        console.log('hook before destroy')
+      },
+      destroyed() {
+        console.log('hook destroyed')
+      },
+      methods: {
+        destroyMe () {
+          setTimeout(() => {
+            this.$destroy()
+          }, 100)
+        }
+      },
+    });
+  </script>
+</body>
+</html>
