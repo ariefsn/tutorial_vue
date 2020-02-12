@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directive Vue</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+    <table class="table table-dense table-striped table-bordered table-sm table-hover">
+      <tr>
+        <td>v-show</td>
+        <td>
+          <input type="checkbox" v-model="showMe">
+          <span v-show="showMe">
+            Halo, teks ini akan ditampilkan jika variable showMe bernilai true.
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>v-if</td>
+        <td>
+          <label for="usia"></label>
+          <input type="number" id="usia" v-model.number="usia">
+          <span v-if="usia < 6">Anda masih balita</span>
+          <span v-else-if="usia < 7">Anda masih TK</span>
+          <span v-else-if="usia < 13">Anda masih SD</span>
+          <span v-else-if="usia < 16">Anda masih SMP</span>
+          <span v-else-if="usia < 19">Anda masih SMA</span>
+          <span v-else-if="usia < 23">Anda sudah Kuliah</span>
+          <span v-else>Anda sudah tua</span>
+        </td>
+      </tr>
+      <tr>
+        <td>v-for</td>
+        <td>
+          <div>
+            <div>--- Loop 1 ---</div>
+            <div>
+              <span v-for="n in loop1" :key="n">{{ n + ' ' }}</span>
+            </div>
+            <div>--- Loop 2 ---</div>
+            <div>
+              <span v-for="(buah, index) in loop2" :key="buah">{{ buah + ' ' }}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>v-html</td>
+        <td>
+          <div>
+            <label for="tanpaVHtml">Tanpa v-html: </label>
+            <span id="tanpaVHtml">{{ htmlElement }}</span>
+          </div>
+          <div>
+            <label for="denganVHtml">Dengan v-html: </label>
+            <span id="denganVHtml" v-html="htmlElement"></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>v-once</td>
+        <td>
+          <div>
+            <input type="text" class="form-control" v-model="once">
+          </div>
+          <div>
+            <label for="tanpaVOnce">Tanpa v-once: </label>
+            <span>{{ once }}</span>
+          </div>
+          <div>
+            <label for="denganVOnce">Dengan v-once: </label>
+            <span id="denganVOnce" v-once>{{ once }}</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>custom directive</td>
+        <td>
+          <input type="text" class="form-control" v-model="directiveKita">
+          <div v-custom-directive:iniArgument.modA.modB="directiveKita"></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          showMe: false,
+          usia: 0,
+          loop1: 5,
+          loop2: ['apel', 'mangga', 'jeruk', 'durian', 'anggur'],
+          htmlElement: '<span style="color: white; background-color: blue">Teks ini harusnya berwarna putih dengan latar belakang biru.</span>',
+          once: 'Teks ini tidak akan dirubah',
+          directiveKita: 'Halo ini adalah custom directive'
+        }
+      },
+      directives: {
+        customDirective: {
+          bind (el, binding, vNode) {
+            el.innerHTML =
+              `name: ${binding.name}<br/>` +
+              `value: ${binding.value}<br/>` +
+              `expression: ${binding.expression}<br/>` +
+              `argument: ${binding.arg}<br/>` +
+              `modifiers: ${JSON.stringify(binding.modifiers)}<br/>` +
+              `vNodeKeys: ${Object.keys(vNode).join(', ')}<br/>`
+          },
+          update (el, binding, vNode) {
+            el.innerHTML =
+              `name: ${binding.name}<br/>` +
+              `value: ${binding.value}<br/>` +
+              `expression: ${binding.expression}<br/>` +
+              `argument: ${binding.arg}<br/>` +
+              `modifiers: ${JSON.stringify(binding.modifiers)}<br/>` +
+              `vNodeKeys: ${Object.keys(vNode).join(', ')}<br/>`
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
