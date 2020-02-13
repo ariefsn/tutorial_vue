@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixin Vue</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+    <div>
+      <table class="table table-dense table-striped table-bordered table-sm table-hover">
+        <tr>
+          <td>Nama</td>
+          <td>{{ user.nama }}</td>
+        </tr>
+        <tr>
+          <td>Usia</td>
+          <td>{{ user.usia }}</td>
+        </tr>
+        <tr>
+          <td>Alamat</td>
+          <td>{{ user.alamat }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          user: {
+            nama: '',
+            usia: 17
+          }
+        }
+      },
+      mounted () {
+        setTimeout(() => {
+           // this.user.alamat = 'Indonesia'
+           this.$set(this.user, 'alamat', 'Indonesia')
+          console.log(this.user)
+        }, 2000)
+      },
+    });
+  </script>
+</body>
+</html>
