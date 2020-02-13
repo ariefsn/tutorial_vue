@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixin Vue</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    const mixin = {
+      data () {
+        return {
+          halo: 'Halo saya dari mixin'
+        }
+      },
+      created () {
+        console.log('Hook created-nya mixin')
+      },
+    }
+
+    let app = new Vue({
+      el: '#app',
+      mixins: [mixin],
+      data () {
+        return {
+          halo: 'Halo saya dari komponen'
+        }
+      },
+      created () {
+        console.log(this.halo)
+        console.log('Hook created-nya komponen')
+      },
+    });
+  </script>
+</body>
+</html>
