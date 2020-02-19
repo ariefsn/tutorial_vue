@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Vue</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+    <komponen-teks class="ml-5 mt-5"></komponen-teks>
+    <komponen-teks class="ml-5"></komponen-teks>
+    <komponen-teks class="ml-5"></komponen-teks>
+
+    <komponen-tombol class="ml-5"></komponen-tombol>
+    <komponen-tombol></komponen-tombol>
+    <komponen-tombol></komponen-tombol>
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    Vue.component('komponen-teks', {
+      template: `<div>Halooo saya adalah Komponen Teks</div>`
+    })
+
+    Vue.component('komponen-tombol', {
+      template: `<button @click="jumlahKlik++">Saya sudah diklik {{ jumlahKlik }} kali</button>`,
+      data () {
+        return {
+          jumlahKlik: 0
+        }
+      }
+    })
+
+    let app = new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+</html>
